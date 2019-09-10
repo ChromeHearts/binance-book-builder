@@ -22,7 +22,7 @@ class Level:
 
     def update_level(self, price: str, qty: str):
         price = Decimal(price)
-        if qty == '0.00000000':
+        if Decimal(qty) == 0:
             if price in self._price_level:
                 self._price_level.pop(price)
         else:
