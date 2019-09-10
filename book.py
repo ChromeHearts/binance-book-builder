@@ -1,4 +1,5 @@
 from enum import Enum
+from decimal import Decimal
 
 
 class Side(Enum):
@@ -20,8 +21,8 @@ class Level:
             raise Exception("Unknown side: {}".format(side))
 
     def update_level(self, price: str, qty: str):
-
-        if abs(float(qty)) <= 0.0000001:
+        price = Decimal(price)
+        if qty == '0.00000000':
             if price in self._price_level:
                 self._price_level.pop(price)
         else:
