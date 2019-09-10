@@ -29,6 +29,7 @@ async def run(ticker: str):
             for prc, qty in sobj[sstr]:
                 book.update_level(side, prc, qty)
 
+        print("initial bid & ask")
         print(book.bbo())
 
         def update_book(data):
@@ -43,6 +44,7 @@ async def run(ticker: str):
                 update_book(data)
                 break
 
+        print("RecvTime DelayFromBinance BID BID_QTY ASK ASK_QTY")
         while True:
             r = await websocket.recv()
             recvt = time.time() * 1000
