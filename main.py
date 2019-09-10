@@ -10,6 +10,7 @@ import websockets
 import click
 import os
 import requests
+import time
 
 
 async def run(ticker: str):
@@ -44,10 +45,13 @@ async def run(ticker: str):
 
         while True:
             r = await websocket.recv()
+            recvt = time.time() * 1000
+
             data = json.loads(r)
             update_book(data)
+            delay = recvt - float(data['E'])
 
-            print(book.bbo())
+            print(data['E'], delay, book.bbo())
 
 
 @click.command("binance_build_book")
